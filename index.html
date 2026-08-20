@@ -218,34 +218,61 @@ ul{ list-style:none; }
   font-family:var(--display); font-weight:450;
   font-size:clamp(26px, 3vw, 36px);
 }
-.grid-cards{
-  display:grid; grid-template-columns:repeat(4, 1fr); gap:1px;
-  background:var(--line);
-  border:1px solid var(--line);
+.stock-scroll{
+  display:flex; gap:20px; overflow-x:auto;
+  padding-bottom:8px; margin:0 -4px; padding-left:4px; padding-right:4px;
+  scroll-snap-type:x proximity;
+  scrollbar-width:thin; scrollbar-color:var(--line-strong) transparent;
 }
-.card{
-  background:var(--ink); padding:28px 24px 24px;
-  display:flex; flex-direction:column; gap:18px;
-  transition:background 0.25s ease;
-}
-.card:hover{ background:var(--ink-2); }
-.card-dial{ align-self:center; }
-.card-dial svg{ width:84px; height:84px; }
-.card-dial .cface{ fill:var(--ink-2); stroke:var(--line-strong); }
-.card-dial .chand{ stroke:var(--parchment-dim); stroke-width:3; stroke-linecap:round; transform-origin:50px 50px; }
-.card-dial .chand.chand-min{ stroke:var(--brass-light); stroke-width:2.5; }
-.card.sold .card-dial .cface{ stroke:var(--burgundy); }
-.card.sold .card-dial .chand{ stroke:var(--burgundy); }
+.stock-scroll::-webkit-scrollbar{ height:6px; }
+.stock-scroll::-webkit-scrollbar-thumb{ background:var(--line-strong); border-radius:4px; }
+.stock-scroll::-webkit-scrollbar-track{ background:transparent; }
 
-.card-name{ font-family:var(--display); font-size:18px; line-height:1.3; }
-.card-ref{ font-family:var(--mono); font-size:12px; color:var(--stone); letter-spacing:0.04em; }
-.card-foot{ display:flex; align-items:center; justify-content:space-between; margin-top:auto; }
-.card-price{ font-family:var(--mono); font-size:15px; color:var(--brass-light); }
-.card-tag{
-  font-family:var(--mono); font-size:10.5px; letter-spacing:0.08em;
-  text-transform:uppercase; color:var(--burgundy);
-  border:1px solid var(--burgundy); padding:3px 8px;
+.stock-card{
+  flex:0 0 auto; width:280px; scroll-snap-align:start;
+  display:flex; flex-direction:column; gap:14px;
 }
+.stock-photo{
+  position:relative; display:block; aspect-ratio:4 / 5;
+  overflow:hidden; border-radius:2px;
+}
+.stock-photo svg{
+  position:absolute; inset:0; width:100%; height:100%;
+  opacity:0.55; mix-blend-mode:overlay;
+}
+.stock-photo svg circle{ fill:none; stroke:rgba(255,255,255,0.55); stroke-width:1; }
+.stock-photo svg .pip{ fill:rgba(255,255,255,0.7); stroke:none; }
+.stock-photo, .stock-card:hover .stock-photo{ transition:transform 0.5s cubic-bezier(0.22,1,0.36,1); }
+.stock-card:hover .stock-photo{ transform:translateY(-2px); }
+
+.stock-sold{
+  position:absolute; top:14px; left:14px;
+  font-family:var(--mono); font-size:10px; letter-spacing:0.08em;
+  text-transform:uppercase; color:#f4f1ea;
+  background:rgba(23,20,15,0.55); padding:4px 9px; border-radius:1px;
+}
+
+.stock-name{ font-family:var(--display); font-size:17px; line-height:1.3; }
+.stock-price{ font-family:var(--mono); font-size:14px; color:var(--brass-light); }
+
+.tone-1 .stock-photo{ background:
+  radial-gradient(120% 90% at 70% 15%, rgba(255,255,255,0.5), transparent 55%),
+  linear-gradient(155deg, #d9d3c4 0%, #a49c88 45%, #4a4436 100%); }
+.tone-2 .stock-photo{ background:
+  radial-gradient(120% 90% at 25% 15%, rgba(255,255,255,0.35), transparent 55%),
+  linear-gradient(155deg, #c9a668 0%, #8f6b34 45%, #4a3418 100%); }
+.tone-3 .stock-photo{ background:
+  radial-gradient(120% 90% at 70% 20%, rgba(255,255,255,0.2), transparent 55%),
+  linear-gradient(155deg, #b3564b 0%, #7a3226 50%, #351510 100%); }
+.tone-4 .stock-photo{ background:
+  radial-gradient(120% 90% at 30% 15%, rgba(255,255,255,0.22), transparent 55%),
+  linear-gradient(155deg, #2c4a3c 0%, #1a3128 50%, #0c1712 100%); }
+.tone-5 .stock-photo{ background:
+  radial-gradient(120% 90% at 70% 15%, rgba(255,255,255,0.4), transparent 55%),
+  linear-gradient(155deg, #cfc6b4 0%, #8f8570 45%, #3d3628 100%); }
+.tone-6 .stock-photo{ background:
+  radial-gradient(120% 90% at 25% 15%, rgba(255,255,255,0.25), transparent 55%),
+  linear-gradient(155deg, #7a6650 0%, #4a3c2c 50%, #241c14 100%); }
 
 /* ============================================================
    BRANDS
@@ -348,7 +375,6 @@ ul{ list-style:none; }
    RESPONSIVE
    ============================================================ */
 @media (max-width: 980px){
-  .grid-cards{ grid-template-columns:repeat(2, 1fr); }
   .brand-grid{ grid-template-columns:repeat(2, 1fr); }
   .hero{ grid-template-columns:1fr; padding-top:56px; }
   .hero-dial{ order:-1; margin-bottom:12px; }
@@ -365,7 +391,7 @@ ul{ list-style:none; }
   .main-nav a{ padding:16px 0; border-bottom:1px solid var(--line); font-size:16px; }
   .nav-toggle{ display:flex; }
   .local-time{ display:none; }
-  .grid-cards{ grid-template-columns:1fr; }
+  .stock-card{ width:210px; }
   .brand-grid{ grid-template-columns:1fr 1fr; gap:10px; }
   .hero-stats{ gap:28px; flex-wrap:wrap; }
   .sell-inner{ flex-direction:column; align-items:flex-start; }
@@ -468,7 +494,7 @@ ul{ list-style:none; }
       <a href="#" class="text-link">View full collection →</a>
     </div>
 
-    <div class="grid-cards" id="card-grid"><!-- cards injected by script.js --></div>
+    <div class="stock-scroll" id="card-grid"><!-- cards injected by script.js --></div>
   </section>
 
   <!-- BRANDS -->
@@ -567,45 +593,32 @@ ul{ list-style:none; }
    In a real build this would come from an API / CMS.
    ============================================================ */
 const WATCHES = [
-  { brand:"Rolex",  model:"Submariner 'Red Sub'",     ref:"1680",      price:"€ 24.500", sold:false, hh:2,  mm:10 },
-  { brand:"Patek Philippe", model:"Calatrava",          ref:"2526",      price:"€ 68.000", sold:false, hh:10, mm:8  },
-  { brand:"Omega",  model:"Speedmaster Professional",  ref:"145.022",   price:"€ 7.400",  sold:true,  hh:6,  mm:30 },
-  { brand:"Cartier",model:"Tank Louis Cartier",        ref:"W1560003",  price:"€ 5.900",  sold:false, hh:9,  mm:45 },
-  { brand:"Rolex",  model:"Datejust 36 'Wide Boy'",    ref:"1601",      price:"€ 8.200",  sold:false, hh:1,  mm:20 },
-  { brand:"Heuer",  model:"Carrera Chronograph",       ref:"2447",      price:"€ 12.600", sold:false, hh:4,  mm:55 },
-  { brand:"IWC",    model:"Portugieser Chronograph",   ref:"3714",      price:"€ 6.750",  sold:true,  hh:7,  mm:15 },
-  { brand:"Patek Philippe", model:"Nautilus",           ref:"3700/1",    price:"€ 190.000",sold:false, hh:11, mm:2  },
+  { brand:"Rolex",  model:"Submariner 'Red Sub'",     price:"€ 24.500", sold:false, tone:"tone-1" },
+  { brand:"Patek Philippe", model:"Calatrava",          price:"€ 68.000", sold:false, tone:"tone-2" },
+  { brand:"Omega",  model:"Speedmaster Professional",  price:"€ 7.400",  sold:true,  tone:"tone-3" },
+  { brand:"Cartier",model:"Tank Louis Cartier",        price:"€ 5.900",  sold:false, tone:"tone-4" },
+  { brand:"Rolex",  model:"Datejust 36 'Wide Boy'",    price:"€ 8.200",  sold:false, tone:"tone-5" },
+  { brand:"Heuer",  model:"Carrera Chronograph",       price:"€ 12.600", sold:false, tone:"tone-6" },
+  { brand:"IWC",    model:"Portugieser Chronograph",   price:"€ 6.750",  sold:true,  tone:"tone-1" },
+  { brand:"Patek Philippe", model:"Nautilus",           price:"€ 190.000",sold:false, tone:"tone-2" },
 ];
 
 /* ============================================================
-   RENDER PRODUCT CARDS
+   RENDER STOCK LOOP
+   Photo + name + price only — nothing else on the card.
    ============================================================ */
-function miniDialSVG(hh, mm, sold){
-  const hourAngle = (hh % 12) * 30 + mm * 0.5;
-  const minAngle = mm * 6;
-  return `
-    <svg viewBox="0 0 100 100">
-      <circle class="cface" cx="50" cy="50" r="46"/>
-      <line class="chand" x1="50" y1="50" x2="50" y2="26" style="transform:rotate(${hourAngle}deg)"/>
-      <line class="chand chand-min" x1="50" y1="50" x2="50" y2="16" style="transform:rotate(${minAngle}deg)"/>
-    </svg>`;
-}
-
 function renderCards(){
   const grid = document.getElementById("card-grid");
   if(!grid) return;
   grid.innerHTML = WATCHES.map(w => `
-    <article class="card ${w.sold ? "sold" : ""}">
-      <div class="card-dial">${miniDialSVG(w.hh, w.mm, w.sold)}</div>
-      <div>
-        <div class="card-name">${w.brand} ${w.model}</div>
-        <div class="card-ref">REF. ${w.ref}</div>
-      </div>
-      <div class="card-foot">
-        <span class="card-price">${w.price}</span>
-        ${w.sold ? '<span class="card-tag">Sold</span>' : ""}
-      </div>
-    </article>
+    <a href="#" class="stock-card ${w.tone}">
+      <span class="stock-photo" aria-hidden="true">
+        <svg class="stock-dial" viewBox="0 0 200 200"><circle cx="100" cy="100" r="58"/><circle cx="100" cy="100" r="2.5" class="pip"/></svg>
+        ${w.sold ? '<span class="stock-sold">Sold</span>' : ""}
+      </span>
+      <span class="stock-name">${w.brand} ${w.model}</span>
+      <span class="stock-price">${w.price}</span>
+    </a>
   `).join("");
 
   const notSold = WATCHES.filter(w => !w.sold).length;
