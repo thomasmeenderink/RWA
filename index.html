@@ -135,7 +135,7 @@ ul{ list-style:none; }
 .hero{
   display:grid; grid-template-columns:1.05fr 0.95fr; gap:40px;
   align-items:center;
-  padding:88px 32px 96px;
+  padding:56px 32px 64px;
 }
 .hero h1{
   font-family:var(--display); font-weight:450;
@@ -144,13 +144,13 @@ ul{ list-style:none; }
 }
 .hero h1 em{ color:var(--brass-light); font-style:italic; font-weight:450; }
 .hero-sub{
-  margin-top:26px; max-width:440px;
+  margin-top:18px; max-width:440px;
   color:var(--parchment-dim); font-size:16.5px; line-height:1.65;
 }
-.hero-actions{ display:flex; gap:16px; margin-top:36px; }
+.hero-actions{ display:flex; gap:16px; margin-top:28px; }
 .hero-stats{
-  display:flex; gap:44px; margin-top:64px;
-  padding-top:28px; border-top:1px solid var(--line);
+  display:flex; gap:44px; margin-top:40px;
+  padding-top:22px; border-top:1px solid var(--line);
 }
 .hero-stats dt{
   font-size:12px; color:var(--stone); letter-spacing:0.04em;
@@ -190,24 +190,30 @@ ul{ list-style:none; }
 /* ============================================================
    STOCK / CARDS
    ============================================================ */
-.stock{ padding:100px 32px; }
+.stock{ padding:56px 32px 64px; }
 .section-head{
   display:flex; align-items:baseline; justify-content:space-between;
-  margin-bottom:48px; gap:20px; flex-wrap:wrap;
+  margin-bottom:28px; gap:20px; flex-wrap:wrap;
 }
 .section-head h2{
   font-family:var(--display); font-weight:450;
-  font-size:clamp(26px, 3vw, 36px);
+  font-size:clamp(22px, 2.6vw, 30px);
+  text-transform:uppercase; letter-spacing:0.03em;
+  display:flex; align-items:baseline; gap:14px;
+}
+.count-badge{
+  font-family:var(--mono); font-size:12px; letter-spacing:0.04em;
+  text-transform:none; color:var(--stone);
 }
 .stock-scroll{
   display:flex; gap:20px; overflow-x:auto;
-  padding-bottom:8px; margin:0 -4px; padding-left:4px; padding-right:4px;
+  padding-bottom:4px; margin:0 -4px; padding-left:4px; padding-right:4px;
   scroll-snap-type:x proximity;
-  scrollbar-width:thin; scrollbar-color:var(--line-strong) transparent;
+  scrollbar-width:none; cursor:grab;
+  user-select:none;
 }
-.stock-scroll::-webkit-scrollbar{ height:6px; }
-.stock-scroll::-webkit-scrollbar-thumb{ background:var(--line-strong); border-radius:4px; }
-.stock-scroll::-webkit-scrollbar-track{ background:transparent; }
+.stock-scroll.dragging{ cursor:grabbing; scroll-snap-type:none; }
+.stock-scroll::-webkit-scrollbar{ display:none; }
 
 .stock-card{
   flex:0 0 auto; width:280px; scroll-snap-align:start;
@@ -255,10 +261,24 @@ ul{ list-style:none; }
   radial-gradient(120% 90% at 25% 15%, rgba(255,255,255,0.25), transparent 55%),
   linear-gradient(155deg, #7a6650 0%, #4a3c2c 50%, #241c14 100%); }
 
+.stock-nav{
+  display:flex; justify-content:flex-end; gap:10px; margin-top:18px;
+}
+.stock-arrow{
+  display:flex; align-items:center; justify-content:center;
+  width:36px; height:36px; border-radius:50%;
+  background:none; border:1px solid var(--line-strong);
+  color:var(--parchment); cursor:pointer;
+  transition:border-color 0.2s ease, opacity 0.2s ease;
+}
+.stock-arrow svg{ width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.stock-arrow:hover:not(:disabled){ border-color:var(--brass); color:var(--brass); }
+.stock-arrow:disabled{ opacity:0.3; cursor:default; }
+
 /* ============================================================
    TRUST BAR — warranty / delivery / returns
    ============================================================ */
-.trust-bar{ background:#101915; padding:64px 0; }
+.trust-bar{ background:#101915; padding:44px 0; }
 .trust-grid{
   display:grid; grid-template-columns:repeat(3, 1fr); gap:40px;
   text-align:center;
@@ -288,10 +308,11 @@ ul{ list-style:none; }
 /* ============================================================
    BRANDS
    ============================================================ */
-.brands{ padding:40px 32px 100px; }
+.brands{ padding:56px 32px; }
 .brands h2{
-  font-family:var(--display); font-weight:450; font-size:28px;
-  margin-bottom:32px;
+  font-family:var(--display); font-weight:450; font-size:26px;
+  text-transform:uppercase; letter-spacing:0.03em;
+  margin-bottom:24px;
 }
 .brand-grid{
   display:grid; grid-template-columns:repeat(4, 1fr); gap:16px;
@@ -349,7 +370,7 @@ ul{ list-style:none; }
 /* ============================================================
    SELL CTA
    ============================================================ */
-.sell-cta{ background:var(--ink-2); padding:90px 0; }
+.sell-cta{ background:var(--ink-2); padding:64px 0; }
 .sell-inner{
   display:flex; align-items:center; justify-content:space-between;
   gap:40px; flex-wrap:wrap;
@@ -361,7 +382,7 @@ ul{ list-style:none; }
 /* ============================================================
    EDITORIAL — consultation / care / satisfaction
    ============================================================ */
-.editorial{ padding:100px 32px; display:flex; flex-direction:column; gap:96px; }
+.editorial{ padding:64px 32px; display:flex; flex-direction:column; gap:64px; }
 .editorial-row{
   display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;
 }
@@ -398,7 +419,7 @@ ul{ list-style:none; }
 /* ============================================================
    ABOUT / QUOTE
    ============================================================ */
-.about{ padding:110px 32px; text-align:center; }
+.about{ padding:72px 32px; text-align:center; }
 .about blockquote{
   font-family:var(--display); font-style:italic; font-weight:450;
   font-size:clamp(24px, 3.2vw, 34px); max-width:760px; margin:0 auto;
@@ -409,7 +430,7 @@ ul{ list-style:none; }
 /* ============================================================
    FOOTER
    ============================================================ */
-.site-footer{ border-top:1px solid var(--line); padding:56px 0 40px; }
+.site-footer{ border-top:1px solid var(--line); padding:40px 0 32px; }
 .footer-inner{
   display:flex; justify-content:space-between; align-items:flex-start;
   gap:40px; flex-wrap:wrap;
@@ -443,7 +464,7 @@ ul{ list-style:none; }
   .stock-card{ width:210px; }
   .trust-grid{ grid-template-columns:1fr; gap:44px; }
   .brand-grid{ grid-template-columns:1fr 1fr; gap:10px; }
-  .editorial{ gap:56px; padding:70px 32px; }
+  .editorial{ gap:40px; padding:48px 32px; }
   .editorial-row{ grid-template-columns:1fr; gap:28px; }
   .editorial-row-reverse .editorial-photo{ order:0; }
   .editorial-copy p{ max-width:none; }
@@ -536,11 +557,20 @@ ul{ list-style:none; }
   <!-- STOCK -->
   <section class="stock wrap" id="stock">
     <div class="section-head">
-      <h2>IN STOCK</h2>
+      <h2>In stock <span class="count-badge"><span id="stock-count-2">27</span> pieces</span></h2>
       <a href="#" class="text-link">View full collection →</a>
     </div>
 
     <div class="stock-scroll" id="card-grid"><!-- cards injected by script.js --></div>
+
+    <div class="stock-nav">
+      <button class="stock-arrow" id="stock-prev" aria-label="Scroll left" disabled>
+        <svg viewBox="0 0 24 24"><path d="M15 5 L8 12 L15 19"/></svg>
+      </button>
+      <button class="stock-arrow" id="stock-next" aria-label="Scroll right">
+        <svg viewBox="0 0 24 24"><path d="M9 5 L16 12 L9 19"/></svg>
+      </button>
+    </div>
   </section>
 
   <!-- TRUST BAR -->
@@ -591,7 +621,7 @@ ul{ list-style:none; }
 
   <!-- BRANDS -->
   <section class="brands wrap" id="brands">
-    <h2>OUR BRANDS</h2>
+    <h2>Our brands</h2>
     <div class="brand-grid">
 
       <a href="#" class="brand-card brand-ap">
@@ -820,6 +850,53 @@ function tickClock(){
 }
 
 /* ============================================================
+   STOCK ROW — arrow buttons + click-and-drag scrolling
+   ============================================================ */
+function initStockScroll(){
+  const row = document.getElementById("card-grid");
+  const prevBtn = document.getElementById("stock-prev");
+  const nextBtn = document.getElementById("stock-next");
+  if(!row || !prevBtn || !nextBtn) return;
+
+  const step = () => Math.min(row.clientWidth * 0.8, 600);
+
+  function updateArrows(){
+    const maxScroll = row.scrollWidth - row.clientWidth - 1;
+    prevBtn.disabled = row.scrollLeft <= 0;
+    nextBtn.disabled = row.scrollLeft >= maxScroll;
+  }
+
+  prevBtn.addEventListener("click", () => row.scrollBy({ left: -step(), behavior: "smooth" }));
+  nextBtn.addEventListener("click", () => row.scrollBy({ left: step(), behavior: "smooth" }));
+  row.addEventListener("scroll", updateArrows);
+  window.addEventListener("resize", updateArrows);
+
+  // click-and-drag ("grab") scrolling
+  let isDown = false, startX = 0, startScroll = 0, moved = false;
+
+  row.addEventListener("mousedown", (e) => {
+    isDown = true; moved = false;
+    startX = e.pageX; startScroll = row.scrollLeft;
+    row.classList.add("dragging");
+  });
+  window.addEventListener("mouseup", () => {
+    isDown = false;
+    row.classList.remove("dragging");
+  });
+  window.addEventListener("mousemove", (e) => {
+    if(!isDown) return;
+    e.preventDefault();
+    const delta = e.pageX - startX;
+    if(Math.abs(delta) > 4) moved = true;
+    row.scrollLeft = startScroll - delta;
+  });
+  // prevent the drag from also triggering a card click
+  row.addEventListener("click", (e) => { if(moved) e.preventDefault(); }, true);
+
+  updateArrows();
+}
+
+/* ============================================================
    MOBILE NAV
    ============================================================ */
 function initNav(){
@@ -845,6 +922,7 @@ document.addEventListener("DOMContentLoaded", () => {
   tickClock();
   setInterval(tickClock, 1000);
   initNav();
+  initStockScroll();
   const yearEl = document.getElementById("year");
   if(yearEl) yearEl.textContent = new Date().getFullYear();
 });
