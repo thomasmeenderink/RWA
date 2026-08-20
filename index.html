@@ -13,17 +13,17 @@
    NOORD & ZEEUW — design tokens
    ============================================================ */
 :root{
-  --ink:        #0b0f0d;
-  --ink-2:      #121815;
-  --ink-3:      #182019;
-  --parchment:  #ede6d8;
-  --parchment-dim: #cfc7b6;
+  --ink:        #ffffff;
+  --ink-2:      #f4f1ea;
+  --ink-3:      #ece6d9;
+  --parchment:  #17140f;
+  --parchment-dim: #4c473c;
   --stone:      #8b8579;
-  --brass:      #b08d57;
-  --brass-light:#d9bd8b;
+  --brass:      #8f6d3e;
+  --brass-light:#a97f43;
   --burgundy:   #7a3b3b;
-  --line:       rgba(237,230,216,0.12);
-  --line-strong:rgba(237,230,216,0.22);
+  --line:       rgba(23,20,15,0.10);
+  --line-strong:rgba(23,20,15,0.20);
 
   --display: "Fraunces", ui-serif, Georgia, serif;
   --body:    "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -62,7 +62,7 @@ ul{ list-style:none; }
    ============================================================ */
 .site-header{
   position:sticky; top:0; z-index:50;
-  background:rgba(11,15,13,0.86);
+  background:rgba(255,255,255,0.86);
   backdrop-filter:blur(10px);
   border-bottom:1px solid var(--line);
 }
@@ -162,7 +162,7 @@ ul{ list-style:none; }
 
 /* --- the watch dial: signature element, real ticking clock --- */
 .hero-dial{ display:flex; justify-content:center; }
-.watch-face{ width:min(420px, 90vw); height:auto; overflow:visible; }
+.watch-face{ width:min(420px, 90vw); height:auto; overflow:visible; filter:drop-shadow(0 18px 34px rgba(23,20,15,0.16)); }
 .face-rim-outer{ fill:var(--ink-2); stroke:var(--line-strong); stroke-width:1.5; }
 .face-rim{ fill:var(--ink-3); stroke:var(--brass); stroke-width:1; }
 .ticks line{ stroke:var(--parchment-dim); }
@@ -255,18 +255,58 @@ ul{ list-style:none; }
   font-family:var(--display); font-weight:450; font-size:28px;
   margin-bottom:32px;
 }
-.brand-list{
-  display:flex; flex-wrap:wrap; gap:0;
-  border-top:1px solid var(--line);
+.brand-grid{
+  display:grid; grid-template-columns:repeat(4, 1fr); gap:16px;
 }
-.brand-list li{ border-bottom:1px solid var(--line); flex:1 1 33%; }
-.brand-list a{
-  display:block; padding:26px 4px; font-family:var(--display);
-  font-size:22px; color:var(--parchment-dim);
-  border-right:1px solid var(--line);
-  transition:color 0.2s ease, padding-left 0.2s ease;
+.brand-card{
+  position:relative; display:block;
+  aspect-ratio:3 / 4; overflow:hidden; border-radius:2px;
 }
-.brand-list a:hover{ color:var(--brass-light); padding-left:14px; }
+.brand-photo{
+  position:absolute; inset:0;
+  transition:transform 0.6s cubic-bezier(0.22,1,0.36,1);
+}
+.brand-card:hover .brand-photo{ transform:scale(1.045); }
+.brand-dial{
+  position:absolute; inset:0; width:100%; height:100%;
+  opacity:0.5; mix-blend-mode:overlay;
+}
+.brand-dial circle, .brand-dial rect{
+  fill:none; stroke:rgba(255,255,255,0.55); stroke-width:1;
+}
+.brand-dial .pip{ fill:rgba(255,255,255,0.7); stroke:none; }
+
+.brand-ap .brand-photo{ background:
+  radial-gradient(120% 90% at 75% 15%, rgba(255,255,255,0.16), transparent 55%),
+  linear-gradient(155deg, #7a6650 0%, #4a3c2c 45%, #241c14 100%); }
+.brand-cartier .brand-photo{ background:
+  radial-gradient(110% 90% at 25% 10%, rgba(255,255,255,0.14), transparent 55%),
+  linear-gradient(160deg, #2c4a3c 0%, #1a3128 50%, #0c1712 100%); }
+.brand-patek .brand-photo{ background:
+  radial-gradient(120% 90% at 70% 20%, rgba(255,255,255,0.14), transparent 55%),
+  linear-gradient(155deg, #6e2e34 0%, #451c22 50%, #200d10 100%); }
+.brand-rolex .brand-photo{ background:
+  radial-gradient(120% 90% at 30% 15%, rgba(255,255,255,0.22), transparent 55%),
+  linear-gradient(155deg, #cfae74 0%, #a9803f 50%, #6b4c22 100%); }
+
+.brand-card::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(0deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.15) 42%, transparent 62%);
+}
+.brand-info{
+  position:absolute; left:0; right:0; bottom:0; z-index:2;
+  padding:22px 22px 20px; display:flex; flex-direction:column; gap:6px;
+}
+.brand-name{
+  font-family:var(--display); font-weight:450; font-size:26px;
+  color:#f4f1ea;
+}
+.brand-link{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:0.08em;
+  text-transform:uppercase; color:#e4dcc8;
+  transition:color 0.2s ease;
+}
+.brand-card:hover .brand-link{ color:var(--brass-light); }
 
 /* ============================================================
    SELL CTA
@@ -309,7 +349,7 @@ ul{ list-style:none; }
    ============================================================ */
 @media (max-width: 980px){
   .grid-cards{ grid-template-columns:repeat(2, 1fr); }
-  .brand-list li{ flex:1 1 50%; }
+  .brand-grid{ grid-template-columns:repeat(2, 1fr); }
   .hero{ grid-template-columns:1fr; padding-top:56px; }
   .hero-dial{ order:-1; margin-bottom:12px; }
   .watch-face{ width:min(300px, 70vw); }
@@ -326,7 +366,7 @@ ul{ list-style:none; }
   .nav-toggle{ display:flex; }
   .local-time{ display:none; }
   .grid-cards{ grid-template-columns:1fr; }
-  .brand-list li{ flex:1 1 100%; }
+  .brand-grid{ grid-template-columns:1fr 1fr; gap:10px; }
   .hero-stats{ gap:28px; flex-wrap:wrap; }
   .sell-inner{ flex-direction:column; align-items:flex-start; }
   .footer-inner{ flex-direction:column; }
@@ -433,15 +473,50 @@ ul{ list-style:none; }
 
   <!-- BRANDS -->
   <section class="brands wrap" id="brands">
-    <h2>Houses we trade in</h2>
-    <ul class="brand-list">
-      <li><a href="#">Rolex</a></li>
-      <li><a href="#">Patek&nbsp;Philippe</a></li>
-      <li><a href="#">Omega</a></li>
-      <li><a href="#">Cartier</a></li>
-      <li><a href="#">Heuer</a></li>
-      <li><a href="#">IWC</a></li>
-    </ul>
+    <h2>Our brands</h2>
+    <div class="brand-grid">
+
+      <a href="#" class="brand-card brand-ap">
+        <span class="brand-photo" aria-hidden="true">
+          <svg class="brand-dial" viewBox="0 0 200 200"><circle cx="100" cy="100" r="60"/><circle cx="100" cy="100" r="2.5" class="pip"/></svg>
+        </span>
+        <span class="brand-info">
+          <span class="brand-name">Audemars Piguet</span>
+          <span class="brand-link">View all watches →</span>
+        </span>
+      </a>
+
+      <a href="#" class="brand-card brand-cartier">
+        <span class="brand-photo" aria-hidden="true">
+          <svg class="brand-dial" viewBox="0 0 200 200"><rect x="55" y="45" width="90" height="110" rx="4"/></svg>
+        </span>
+        <span class="brand-info">
+          <span class="brand-name">Cartier</span>
+          <span class="brand-link">View all watches →</span>
+        </span>
+      </a>
+
+      <a href="#" class="brand-card brand-patek">
+        <span class="brand-photo" aria-hidden="true">
+          <svg class="brand-dial" viewBox="0 0 200 200"><circle cx="100" cy="100" r="58"/><circle cx="100" cy="100" r="2.5" class="pip"/></svg>
+        </span>
+        <span class="brand-info">
+          <span class="brand-name">Patek Philippe</span>
+          <span class="brand-link">View all watches →</span>
+        </span>
+      </a>
+
+      <a href="#" class="brand-card brand-rolex">
+        <span class="brand-photo" aria-hidden="true">
+          <svg class="brand-dial" viewBox="0 0 200 200"><circle cx="100" cy="100" r="60"/><circle cx="100" cy="100" r="2.5" class="pip"/></svg>
+        </span>
+        <span class="brand-info">
+          <span class="brand-name">Rolex</span>
+          <span class="brand-link">View all watches →</span>
+        </span>
+      </a>
+
+    </div>
   </section>
 
   <!-- SELL CTA -->
