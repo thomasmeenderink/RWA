@@ -188,25 +188,6 @@ ul{ list-style:none; }
 .pin{ fill:var(--brass); }
 
 /* ============================================================
-   MARQUEE — running reference numbers
-   ============================================================ */
-.marquee{
-  border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-  overflow:hidden; white-space:nowrap; padding:16px 0;
-}
-.marquee-track{
-  display:inline-flex; animation:scroll 38s linear infinite;
-}
-.marquee-track span{
-  font-family:var(--mono); font-size:13px; color:var(--stone);
-  letter-spacing:0.06em;
-}
-@keyframes scroll{
-  from{ transform:translateX(0); }
-  to{ transform:translateX(-50%); }
-}
-
-/* ============================================================
    STOCK / CARDS
    ============================================================ */
 .stock{ padding:100px 32px; }
@@ -273,6 +254,36 @@ ul{ list-style:none; }
 .tone-6 .stock-photo{ background:
   radial-gradient(120% 90% at 25% 15%, rgba(255,255,255,0.25), transparent 55%),
   linear-gradient(155deg, #7a6650 0%, #4a3c2c 50%, #241c14 100%); }
+
+/* ============================================================
+   TRUST BAR — warranty / delivery / returns
+   ============================================================ */
+.trust-bar{ background:#101915; padding:64px 0; }
+.trust-grid{
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:40px;
+  text-align:center;
+}
+.trust-item{ display:flex; flex-direction:column; align-items:center; }
+.trust-icon{
+  width:56px; height:56px; margin-bottom:18px;
+  fill:none; stroke:var(--brass-light); stroke-width:1.6;
+  stroke-linecap:round; stroke-linejoin:round;
+}
+.trust-icon circle{ fill:rgba(217,189,139,0.06); }
+.trust-ticks line{ stroke-width:1.6; }
+.trust-icon text{
+  font-family:var(--mono); font-size:15px; fill:var(--brass-light);
+  stroke:none; dominant-baseline:middle;
+}
+.trust-item h3{
+  font-family:var(--display); font-weight:450; font-size:16px;
+  letter-spacing:0.02em; text-transform:uppercase; color:var(--brass-light);
+  margin-bottom:10px;
+}
+.trust-item p{
+  font-size:14px; line-height:1.65; color:#c9c2b2;
+  max-width:280px;
+}
 
 /* ============================================================
    BRANDS
@@ -345,6 +356,44 @@ ul{ list-style:none; }
 }
 .sell-cta h2{ font-family:var(--display); font-weight:450; font-size:clamp(28px,3.4vw,40px); }
 .sell-copy{ margin-top:14px; max-width:420px; color:var(--parchment-dim); }
+.btn-small{ padding:12px 22px; font-size:13px; margin-top:8px; }
+
+/* ============================================================
+   EDITORIAL — consultation / care / satisfaction
+   ============================================================ */
+.editorial{ padding:100px 32px; display:flex; flex-direction:column; gap:96px; }
+.editorial-row{
+  display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;
+}
+.editorial-row-reverse .editorial-photo{ order:2; }
+.editorial-photo{
+  aspect-ratio:5 / 4; border-radius:2px; position:relative; overflow:hidden;
+}
+.editorial-photo::after{
+  content:""; position:absolute; inset:0;
+  background:radial-gradient(140% 100% at 15% 0%, rgba(255,255,255,0.10), transparent 60%);
+}
+.editorial-copy h3{
+  font-family:var(--display); font-weight:450;
+  font-size:clamp(22px, 2.6vw, 28px); letter-spacing:0.01em;
+  text-transform:uppercase; color:var(--brass);
+  margin-bottom:20px;
+}
+.editorial-copy p{
+  color:var(--parchment-dim); font-size:15.5px; line-height:1.75;
+  max-width:440px;
+}
+.editorial-copy p + p{ margin-top:16px; }
+
+.tone-lounge{ background:
+  radial-gradient(120% 90% at 75% 10%, rgba(255,255,255,0.10), transparent 55%),
+  linear-gradient(150deg, #8a7154 0%, #5c4a35 45%, #2a2117 100%); }
+.tone-macro{ background:
+  radial-gradient(110% 90% at 65% 25%, rgba(255,255,255,0.30), transparent 55%),
+  linear-gradient(150deg, #d8b467 0%, #a3782f 45%, #5c3f16 100%); }
+.tone-velvet{ background:
+  radial-gradient(120% 90% at 30% 15%, rgba(255,255,255,0.12), transparent 55%),
+  linear-gradient(150deg, #2c4a3c 0%, #182a22 50%, #0a130f 100%); }
 
 /* ============================================================
    ABOUT / QUOTE
@@ -392,7 +441,12 @@ ul{ list-style:none; }
   .nav-toggle{ display:flex; }
   .local-time{ display:none; }
   .stock-card{ width:210px; }
+  .trust-grid{ grid-template-columns:1fr; gap:44px; }
   .brand-grid{ grid-template-columns:1fr 1fr; gap:10px; }
+  .editorial{ gap:56px; padding:70px 32px; }
+  .editorial-row{ grid-template-columns:1fr; gap:28px; }
+  .editorial-row-reverse .editorial-photo{ order:0; }
+  .editorial-copy p{ max-width:none; }
   .hero-stats{ gap:28px; flex-wrap:wrap; }
   .sell-inner{ flex-direction:column; align-items:flex-start; }
   .footer-inner{ flex-direction:column; }
@@ -479,14 +533,6 @@ ul{ list-style:none; }
     </div>
   </section>
 
-  <!-- REFERENCE MARQUEE -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track">
-      <span>REF. 1016 · REF. 5711/1A · REF. 15202ST · REF. 2526 · REF. 6542 · REF. 16610LV · REF. 3970 · REF. CAL. 2440 · REF. 1675 · REF. 2497 · REF. 5164A ·&nbsp;</span>
-      <span>REF. 1016 · REF. 5711/1A · REF. 15202ST · REF. 2526 · REF. 6542 · REF. 16610LV · REF. 3970 · REF. CAL. 2440 · REF. 1675 · REF. 2497 · REF. 5164A ·&nbsp;</span>
-    </div>
-  </div>
-
   <!-- STOCK -->
   <section class="stock wrap" id="stock">
     <div class="section-head">
@@ -495,6 +541,52 @@ ul{ list-style:none; }
     </div>
 
     <div class="stock-scroll" id="card-grid"><!-- cards injected by script.js --></div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <section class="trust-bar">
+    <div class="wrap trust-grid">
+
+      <div class="trust-item">
+        <svg class="trust-icon" viewBox="0 0 80 80" aria-hidden="true">
+          <circle cx="40" cy="40" r="30"/>
+          <g class="trust-ticks">
+            <line x1="40" y1="7" x2="40" y2="13"/>
+            <line x1="73" y1="40" x2="67" y2="40"/>
+            <line x1="40" y1="73" x2="40" y2="67"/>
+            <line x1="7" y1="40" x2="13" y2="40"/>
+            <line x1="63.8" y1="16.2" x2="59.5" y2="20.5"/>
+            <line x1="63.8" y1="63.8" x2="59.5" y2="59.5"/>
+            <line x1="16.2" y1="63.8" x2="20.5" y2="59.5"/>
+            <line x1="16.2" y1="16.2" x2="20.5" y2="20.5"/>
+          </g>
+          <text x="40" y="46" text-anchor="middle">12</text>
+        </svg>
+        <h3>12-month warranty</h3>
+        <p>Every pre-owned watch we sell comes with a 12-month warranty from the date of purchase.</p>
+      </div>
+
+      <div class="trust-item">
+        <svg class="trust-icon" viewBox="0 0 80 80" aria-hidden="true">
+          <path d="M40 12 L68 26 L68 54 L40 68 L12 54 L12 26 Z"/>
+          <path d="M12 26 L40 40 L68 26"/>
+          <line x1="40" y1="40" x2="40" y2="68"/>
+        </svg>
+        <h3>Free worldwide delivery</h3>
+        <p>Fully insured shipping on every order. Any customs fees or import duties remain the client's responsibility.</p>
+      </div>
+
+      <div class="trust-item">
+        <svg class="trust-icon" viewBox="0 0 80 80" aria-hidden="true">
+          <path d="M58 24 A24 24 0 1 1 24 20" fill="none"/>
+          <path d="M50 16 L59 24 L49 30"/>
+          <text x="40" y="46" text-anchor="middle">14</text>
+        </svg>
+        <h3>14-day return policy</h3>
+        <p>Not entirely happy with your purchase? Return it within 14 days for a full refund, no questions asked.</p>
+      </div>
+
+    </div>
   </section>
 
   <!-- BRANDS -->
@@ -558,6 +650,57 @@ ul{ list-style:none; }
       </div>
       <a href="#" class="btn btn-brass">Get a valuation</a>
     </div>
+  </section>
+
+  <!-- EDITORIAL: consultation / care / satisfaction -->
+  <section class="editorial wrap" id="care">
+
+    <div class="editorial-row">
+      <div class="editorial-photo tone-lounge" aria-hidden="true"></div>
+      <div class="editorial-copy">
+        <h3>Online consultation</h3>
+        <p>
+          Browse the collection or dig deeper into a specific reference before you
+          decide. Book a personal video call and we'll walk through condition,
+          provenance and fit at a pace that suits you — whether it's your first
+          serious watch or your fifteenth.
+        </p>
+        <a href="#" class="btn btn-brass btn-small">Schedule appointment</a>
+      </div>
+    </div>
+
+    <div class="editorial-row editorial-row-reverse">
+      <div class="editorial-copy">
+        <h3>Quality and care</h3>
+        <p>
+          Every watch that leaves our lounge has been opened, timed and serviced
+          in-house, priced fairly for what it actually is. We authenticate before
+          we buy and again before we sell, so there's nothing left to take on faith.
+        </p>
+        <p>
+          Already own one of ours? Bring it back any time — a quick health check
+          costs nothing, and we'd rather you ask than wonder.
+        </p>
+      </div>
+      <div class="editorial-photo tone-macro" aria-hidden="true"></div>
+    </div>
+
+    <div class="editorial-row">
+      <div class="editorial-photo tone-velvet" aria-hidden="true"></div>
+      <div class="editorial-copy">
+        <h3>Customer satisfaction</h3>
+        <p>
+          Buying a serious watch should feel considered, not rushed. Whether
+          you're building a first collection or adding a single grail piece, our
+          team gives you the time and the numbers to decide with confidence.
+        </p>
+        <p>
+          Over a decade of clients keep coming back for the same reason — a
+          straight answer, delivered kindly, every time.
+        </p>
+      </div>
+    </div>
+
   </section>
 
   <!-- ABOUT -->
